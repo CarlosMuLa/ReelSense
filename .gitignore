@@ -137,3 +137,16 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+terraform/vars.tfvars
+data/actors.csv/actors.csv
+data/countries.csv/countries.csv
+data/crew.csv/crew.csv
+data/genres.csv/genres.csv
+data/languages.csv/languages.csv
+data/movies.csv/movies.csv
+data/posters.csv/posters.csv
+data/releases.csv/releases.csv
+data/studios.csv/studios.csv
+data/themes.csv/themes.csv
+terraform/.terraform/providers/registry.terraform.io/hashicorp/aws/5.100.0/windows_amd64/terraform-provider-aws_v5.100.0_x5.exe
+terraform/.terraform.lock.hcl
