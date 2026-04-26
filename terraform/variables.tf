@@ -13,3 +13,11 @@ variable "key_pair_name" {
   description = "The name of the AWS key pair to use for the EC2 instance"
   type        = string
 }
+
+variable "kaggle_username" { 
+  type = string 
+}
+variable "kaggle_key" { 
+  type      = string
+  sensitive = true 
+}

@@ -1,0 +1,36 @@
+name: Deploy MLOps Infra
+
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  deploy-terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Deploy Terraform Infrastructure
+        run: |
+          terraform init
+          terraform apply -auto-approve
+        env:
+          # Credenciales AWS
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1
+          
+          # Variables para Terraform
+          TF_VAR_kaggle_username: ${{ secrets.KAGGLE_USERNAME }}
+          TF_VAR_kaggle_key: ${{ secrets.KAGGLE_KEY }}
+          TF_VAR_db_username: "ReelSensepostgres"
+          TF_VAR_db_password: ${{ secrets.DB_PASSWORD }}
+          TF_VAR_key_pair_name: "llavero"
