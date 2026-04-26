@@ -110,7 +110,7 @@ resource "aws_instance" "reelsense_ec2" {
   user_data = <<-EOF
     #!/bin/bash
     yum update -y
-    yum install -y unzip
+    yum install -y unzip postgresql
 
     mkdir -p /root/.kaggle
     echo '{"username":"${var.kaggle_username}","key":"${var.kaggle_key}"}' > /root/.kaggle/kaggle.json
@@ -147,12 +147,11 @@ provider "postgresql" {
   port     = aws_db_instance.reelsense_db.port
   username = var.db_username
   password = var.db_password
-  database = "postgres" # La base de datos por defecto
+  database = "postgres" 
   sslmode  = "require"
 }
 
-# Ejecuta el equivalente a "CREATE EXTENSION vector;"
 resource "postgresql_extension" "pgvector" {
   name       = "vector"
-  depends_on = [aws_db_instance.reelsense_db] # Espera a que la BD exista primero
+  depends_on = [aws_db_instance.reelsense_db]
 }
