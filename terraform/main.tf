@@ -85,7 +85,7 @@ resource "aws_iam_instance_profile" "reelsense_profile" {
 }
 
 # 5. Cómputo (EC2)
-resource "aws_ec2_instance" "reelsense_ec2" {
+resource "aws_instance" "reelsense_ec2" {
   ami                  = "ami-098e39bafa7e7303d"
   instance_type        = "t3.micro"
   key_name             = var.key_pair_name
