@@ -1,8 +1,13 @@
 terraform{
+    
     required_providers {
         aws = {
             source = "hashicorp/aws"
             version = "~> 5.0"
+        }
+        postgresql = {
+            source = "cyrilgdn/postgresql"
+            version = "~> 1.21.0"
         }
     }
     backend "s3" {
@@ -11,6 +16,9 @@ terraform{
     region = "us-east-1"
   }
 }
+provider "aws" {
+        region = "us-east-1"
+    }
 
 
 
@@ -120,7 +128,7 @@ resource "aws_instance" "reelsense_ec2" {
 resource "aws_db_instance" "reelsense_db" {
   identifier             = "mlops-vector-db"
   engine                 = "postgres"
-  engine_version         = "17" # Soporta pgvector
+  engine_version         = "17"
   instance_class         = "db.t3.micro"
   allocated_storage      = 20
   username               = var.db_username
@@ -132,4 +140,19 @@ resource "aws_db_instance" "reelsense_db" {
 
 output "db_endpoint" {
   value = aws_db_instance.reelsense_db.endpoint
+}
+
+provider "postgresql" {
+  host     = aws_db_instance.reelsense_db.address
+  port     = aws_db_instance.reelsense_db.port
+  username = var.db_username
+  password = var.db_password
+  database = "postgres" # La base de datos por defecto
+  sslmode  = "require"
+}
+
+# Ejecuta el equivalente a "CREATE EXTENSION vector;"
+resource "postgresql_extension" "pgvector" {
+  name       = "vector"
+  depends_on = [aws_db_instance.reelsense_db] # Espera a que la BD exista primero
 }
