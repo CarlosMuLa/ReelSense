@@ -8,3 +8,8 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
+variable "key_pair_name" {
+  description = "The name of the AWS key pair to use for the EC2 instance"
+  type        = string
+}
