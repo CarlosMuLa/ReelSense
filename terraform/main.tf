@@ -6,7 +6,7 @@ terraform{
         }
     }
     backend "s3" {
-    bucket = var.terraform_state_bucket # El bucket manual que creaste
+    bucket = "terraform-state-carlos-mlops" # El bucket manual que creaste
     key    = "reelsense/terraform.tfstate"  # La ruta y nombre del archivo que se guardará
     region = "us-east-1"
   }
