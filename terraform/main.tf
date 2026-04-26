@@ -110,15 +110,15 @@ resource "aws_instance" "reelsense_ec2" {
   user_data = <<-EOF
     #!/bin/bash
     yum update -y
-    yum install -y unzip postgresql
+    yum install -y unzip postgresql15 python3-pip
+    pip3 install kaggle
 
-    mkdir -p /root/.kaggle
-    echo '{"username":"${var.kaggle_username}","key":"${var.kaggle_key}"}' > /root/.kaggle/kaggle.json
-    chmod 600 /root/.kaggle/kaggle.json
+    mkdir -p /downloads/
     
-    curl -L -o /tmp/letterboxd.zip https://www.kaggle.com/api/v1/datasets/download/gsimonx37/letterboxd
-    unzip /tmp/letterboxd.zip -d /tmp/letterboxd
-    aws s3 sync /tmp/letterboxd s3://${aws_s3_bucket.reelsense_storage.bucket}/dataset
+    curl -L -u "${var.kaggle_username}:${var.kaggle_key}" -o /downloads/letterboxd.zip https://www.kaggle.com/api/v1/datasets/download/gsimonx37/letterboxd
+    unzip /downloads/letterboxd.zip -d /downloads/letterboxd
+    rm -rf /downloads/letterboxd/posters
+    aws s3 sync /downloads/letterboxd s3://${aws_s3_bucket.reelsense_storage.bucket}/dataset
   EOF
 
   tags = { Name = "ReelSense_EC2" }
