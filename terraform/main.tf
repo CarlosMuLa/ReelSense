@@ -53,7 +53,7 @@ resource "aws_security_group" "rds_sg" {
 
 # 4. Identidad (IAM)
 resource "aws_iam_role" "reelsense_ec2_role" {
-  name = "ReelSense_EC2_Role"
+  name = "ReelSense_EC2_Role_v2"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -87,7 +87,7 @@ resource "aws_iam_role_policy" "reelsense_s3_rw" {
 }
 
 resource "aws_iam_instance_profile" "reelsense_profile" {
-  name = "ReelSenseEC2Profile"
+  name = "ReelSenseEC2Profile_v2"
   role = aws_iam_role.reelsense_ec2_role.name
 }
 
