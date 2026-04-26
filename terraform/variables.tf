@@ -21,3 +21,9 @@ variable "kaggle_key" {
   type      = string
   sensitive = true 
 }
+
+variable "terraform_state_bucket" {
+  description = "The name of the S3 bucket to store Terraform state"
+  type        = string
+  sensitive = true
+}

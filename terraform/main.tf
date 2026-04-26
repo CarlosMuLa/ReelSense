@@ -5,7 +5,14 @@ terraform{
             version = "~> 5.0"
         }
     }
+    backend "s3" {
+    bucket = var.terraform_state_bucket # El bucket manual que creaste
+    key    = "reelsense/terraform.tfstate"  # La ruta y nombre del archivo que se guardará
+    region = "us-east-1"
+  }
 }
+
+
 
 resource "aws_s3_bucket" "reelsense_storage" {
   bucket = "reelsense-dataset-mlops-carlos" 
