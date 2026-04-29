@@ -1,0 +1,6 @@
+pgvector
+psycopg2-binary 
+sentence-transformers
+torch-directml
+pandas
+mlflow
