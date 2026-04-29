@@ -1,0 +1,14 @@
+name: Deploy web page interface
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - 'frontend/**'
+jobs:
+    place-holder:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Placeholder step
+              run: echo "This is a placeholder for the frontend deployment workflow. Actual deployment steps will be implemented here."

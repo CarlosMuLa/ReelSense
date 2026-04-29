@@ -1,0 +1,16 @@
+name: Run ETL Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'etl/**'
+
+jobs:
+    place-holder:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Placeholder step
+              run: echo "This is a placeholder for the ETL pipeline workflow. Actual ETL steps will be implemented here."
+              
