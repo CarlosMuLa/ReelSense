@@ -1,0 +1,83 @@
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 20px;
+  max-width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.landing-input {
+  box-sizing: border-box;
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  border: 1px solid var(--bg);
+  border-radius: 8px;
+  width: 100%;
+  font-family: inherit;
+  background-color: var(--bg);
+  text-align: center;
+  color: var(--text-h);
+}
+.landing-input.auto-grow {
+  resize: none;
+  overflow: hidden; 
+  min-height: 50px;
+  max-width: 800px; 
+  line-height: 1.5;
+  display: block;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+
+.landing-input:focus {
+  outline: none;
+  border-color: var(--bg);
+}
+
+.landing-button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: var(--bg);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.2s;
+}
+
+.landing-button:hover {
+  background-color: #1A1953;
+  border-radius: 50px;
+}
+
+.landing-button:disabled {
+  background-color: #080616;
+  cursor: not-allowed;
+  border-radius: 50px;
+  
+}
+
+.char-counter {
+  font-family: var(--mono); /* Usando la fuente que ya tienes en index.css */
+  font-size: 0.85rem;
+  margin-top: -10px;
+  transition: color 0.3s ease;
+}
+
+.text-danger {
+  color: #ff4d4d;
+  font-weight: bold;
+  animation: shake 0.2s ease-in-out; /* Opcional: un pequeño efecto visual */
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
