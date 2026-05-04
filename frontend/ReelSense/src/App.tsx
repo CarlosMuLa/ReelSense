@@ -28,7 +28,7 @@ function App() {
     }
 
     if (query.length > MAX_CHARS) {
-      toast.error('El texto es demasiado largo. Intenta resumir un poco para que el modelo lo procese mejor .', {
+      toast.error('El texto es demasiado largo. Intenta resumir un poco para que el modelo lo procese mejor.', {
         icon: '✂️',
         style: { 
           borderRadius: '10px', 
