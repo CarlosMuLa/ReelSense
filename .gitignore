@@ -154,3 +154,5 @@ terraform/variables.tf
 /etl/.venv
 /data
 etl/mlflow.db
+terraform/terraform.tfvars
+/terraform/.terraform

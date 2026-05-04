@@ -9,6 +9,10 @@ terraform{
             source = "cyrilgdn/postgresql"
             version = "~> 1.21.0"
         }
+        cloudflare = {
+            source = "cloudflare/cloudflare"
+            version = "~> 4.0"
+        }
     }
     backend "s3" {
     bucket = "terraform-state-carlos-mlops" # El bucket manual que creaste
@@ -19,6 +23,10 @@ terraform{
 provider "aws" {
         region = "us-east-1"
     }
+
+provider "cloudflare" {
+  api_token   = var.cloudflare_api_token
+}
 
 
 
@@ -159,4 +167,10 @@ provider "postgresql" {
 resource "postgresql_extension" "pgvector" {
   name       = "vector"
   depends_on = [aws_db_instance.reelsense_db]
+}
+
+resource "cloudflare_pages_project" "reelsense_frontend" {
+  account_id        = var.cloudflare_account_id
+  name              = "reelsense"
+  production_branch = "main"
 }
