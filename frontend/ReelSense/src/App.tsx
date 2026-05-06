@@ -5,7 +5,7 @@ import './App.css'
 
 function App() {
   const [query, setQuery] = useState('')
-  const { mutate, data, isPending, isError } = useMovieSearch();
+  const { mutate, data, isPending } = useMovieSearch();
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   
   const MAX_CHARS = 1000 
