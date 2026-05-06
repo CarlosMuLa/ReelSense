@@ -77,13 +77,18 @@ function App() {
       {data && (
         <div className="results-container">
           <div className="results-grid">
-            {data.map(movie => (
-              <div key={movie.movie_id} className="movie-card">
-                <img src={movie.poster} alt={movie.name} />
-                <h3>{movie.name}</h3>
-                <p>{Math.round(movie.score * 100)}% match</p>
-              </div>
-            ))}
+            {data.map(movie => {
+              const letterboxdName = movie.name.toLowerCase().replace(/ /g, '-').replace(/[^a-z0-9-]/g, '');
+              return (
+                <div key={movie.movie_id} className="movie-card">
+                  <a href={`https://letterboxd.com/film/${letterboxdName}/`} target="_blank" rel="noopener noreferrer">
+                    <img src={movie.poster} alt={movie.name} />
+                  </a>
+                  <h3>{movie.name}</h3>
+                  <p>{Math.round(movie.score * 100)}% match</p>
+                </div>
+              )
+            })}
           </div>
         </div>
       )}
