@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
+import { useMovieSearch } from '../api/useRecomendation'
 import './App.css'
 
 function App() {
   const [query, setQuery] = useState('')
+  const { mutate, data, isPending, isError } = useMovieSearch();
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   
   const MAX_CHARS = 1000 
@@ -16,7 +18,7 @@ function App() {
     }
   }, [query])
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     const wordCount = query.trim().split(/\s+/).filter(word => word.length > 0).length
     
     if (wordCount < MIN_WORDS) {
@@ -45,7 +47,9 @@ function App() {
         borderRadius: '10px', 
         background: '#1A1953', 
         color: '#fff' }})
+    mutate({ query, mode: 'hybrid' })
     console.log("Iniciando búsqueda de embedding...")
+
   }
 
   return (
@@ -65,10 +69,22 @@ function App() {
         type="button" 
         className="landing-button"
         onClick={handleSearch}
-        disabled={query.trim() === ''}
+        disabled={isPending}
       >
-        Buscar
+        {isPending ? 'Buscando...' : 'Buscar'}
       </button>
+
+      {data && (
+        <div className="results-grid">
+          {data.map(movie => (
+            <div key={movie.movie_id} className="movie-card">
+              <img src={movie.poster} alt={movie.name} />
+              <h3>{movie.name}</h3>
+              <p>{Math.round(movie.score * 100)}% match</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
