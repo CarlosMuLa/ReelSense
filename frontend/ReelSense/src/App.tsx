@@ -53,7 +53,7 @@ function App() {
   }
 
   return (
-    <div className="landing-container">
+    <div className={data ? "container-with-results" : "landing-container"}>
       <Toaster position="bottom-center" reverseOrder={false} />
       
       <textarea 
@@ -75,14 +75,16 @@ function App() {
       </button>
 
       {data && (
-        <div className="results-grid">
-          {data.map(movie => (
-            <div key={movie.movie_id} className="movie-card">
-              <img src={movie.poster} alt={movie.name} />
-              <h3>{movie.name}</h3>
-              <p>{Math.round(movie.score * 100)}% match</p>
-            </div>
-          ))}
+        <div className="results-container">
+          <div className="results-grid">
+            {data.map(movie => (
+              <div key={movie.movie_id} className="movie-card">
+                <img src={movie.poster} alt={movie.name} />
+                <h3>{movie.name}</h3>
+                <p>{Math.round(movie.score * 100)}% match</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

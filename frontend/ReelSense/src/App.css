@@ -8,6 +8,41 @@
   max-width: 100%;
   padding: 0 20px;
   box-sizing: border-box;
+  transition: all 0.5s ease-in-out;
+}
+
+.container-with-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5vh;
+  gap: 20px;
+  max-width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.results-container {
+  width: 100%;
+  overflow-y: auto;
+  padding-top: 20px;
+}
+
+/* Estilos para la barra de scroll */
+.results-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.results-container::-webkit-scrollbar-track {
+  background: #080616;
+}
+
+.results-container::-webkit-scrollbar-thumb {
+  background-color: #1A1953;
+  border-radius: 10px;
+  border: 2px solid #080616;
 }
 
 .landing-input {
@@ -80,4 +115,45 @@
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
   75% { transform: translateX(5px); }
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 20px;
+}
+
+.movie-card {
+  background-color: #080616;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+}
+
+.movie-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.movie-card h3 {
+  margin: 10px 0;
+  font-size: 1rem;
+  padding: 0 5px;
+}
+
+.movie-card p {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  color: #a0a0a0;
 }
