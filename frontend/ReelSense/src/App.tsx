@@ -90,9 +90,11 @@ function App() {
         {isPending ? <div className="spinner"></div> : 'Buscar'}
       </button>
 
-      <p style={{ fontSize: '0.85rem', color: '#a0a0a0', marginTop: '-10px', textAlign: 'center' }}>
-        💡 Para mejores resultados, te recomendamos hacer tu búsqueda en inglés.
-      </p>
+      {!(data || isPending) && (
+        <p style={{ fontSize: '0.85rem', color: '#a0a0a0', marginTop: '-10px', textAlign: 'center', transition: 'opacity 0.3s' }}>
+          💡 Para mejores resultados, te recomendamos hacer tu búsqueda en inglés.
+        </p>
+      )}
 
       {(data || isPending) && (
         <div className="results-container">
