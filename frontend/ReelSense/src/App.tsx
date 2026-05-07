@@ -53,7 +53,7 @@ function App() {
   }
 
   return (
-    <div className={data ? "container-with-results" : "landing-container"}>
+    <div className={data || isPending ? "container-with-results" : "landing-container"}>
       <Toaster position="bottom-center" reverseOrder={false} />
 
       <div className="github-logo-container" style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 1000 }}>
@@ -90,21 +90,31 @@ function App() {
         {isPending ? <div className="spinner"></div> : 'Buscar'}
       </button>
 
-      {data && (
+      {(data || isPending) && (
         <div className="results-container">
           <div className="results-grid">
-            {data.map(movie => {
-              const letterboxdName = movie.name.toLowerCase().replace(/ /g, '-').replace(/[^a-z0-9-]/g, '');
-              return (
-                <div key={movie.movie_id} className="movie-card">
-                  <a href={`https://letterboxd.com/film/${letterboxdName}/`} target="_blank" rel="noopener noreferrer">
-                    <img src={movie.poster} alt={movie.name} />
-                  </a>
-                  <h3>{movie.name}</h3>
-                  <p>{Math.round(movie.score * 100)}% match</p>
+            {isPending ? (
+              Array.from({ length: 10 }).map((_, index) => (
+                <div key={index} className="movie-card skeleton-card">
+                  <div className="skeleton-img"></div>
+                  <div className="skeleton-text skeleton-title"></div>
+                  <div className="skeleton-text skeleton-score"></div>
                 </div>
-              )
-            })}
+              ))
+            ) : data ? (
+              data.map(movie => {
+                const letterboxdName = movie.name.toLowerCase().replace(/ /g, '-').replace(/[^a-z0-9-]/g, '');
+                return (
+                  <div key={movie.movie_id} className="movie-card">
+                    <a href={`https://letterboxd.com/film/${letterboxdName}/`} target="_blank" rel="noopener noreferrer">
+                      <img src={movie.poster} alt={movie.name} />
+                    </a>
+                    <h3>{movie.name}</h3>
+                    <p>{Math.round(movie.score * 100)}% match</p>
+                  </div>
+                )
+              })
+            ) : null}
           </div>
         </div>
       )}
