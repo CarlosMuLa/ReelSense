@@ -5,3 +5,7 @@ torch-directml
 pandas
 mlflow
 sqlalchemy
+numpy
+datasets
+transformers
+boto3
