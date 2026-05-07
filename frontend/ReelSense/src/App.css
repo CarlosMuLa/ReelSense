@@ -99,7 +99,22 @@
   background-color: #080616;
   cursor: not-allowed;
   border-radius: 50px;
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .char-counter {
@@ -122,8 +137,8 @@
 }
 
 .results-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
   width: 100%;
@@ -132,6 +147,8 @@
 }
 
 .movie-card {
+  flex: 1 1 150px;
+  max-width: 160px;
   background-color: #080616;
   border-radius: 10px;
   overflow: hidden;

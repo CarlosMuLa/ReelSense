@@ -87,7 +87,7 @@ function App() {
         onClick={handleSearch}
         disabled={isPending}
       >
-        {isPending ? 'Buscando...' : 'Buscar'}
+        {isPending ? <div className="spinner"></div> : 'Buscar'}
       </button>
 
       {data && (
