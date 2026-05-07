@@ -63,6 +63,14 @@ function App() {
         value={query}
         rows={1}
         onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            if (!isPending) {
+              handleSearch();
+            }
+          }
+        }}
       />
       
       <button 
